@@ -8,7 +8,7 @@ run-name:  Compile ffmpeg
 jobs:
   build:
     name: Compile
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     permissions:
       contents: write
     steps:
@@ -25,13 +25,13 @@ jobs:
           
       - name: Run Prep_System.sh
         run: |
-          chmod +x ./Prep_System.sh
-          ./Prep_System.sh
+          sudo chmod +x ./Prep_System.sh
+          sudo ./Prep_System.sh
           
       - name: Run Cross-Compile_FFMPEG.sh
         run: |
-          chmod +x ./Cross-Compile_FFMPEG.sh
-          ./Cross-Compile_FFMPEG.sh
+          sudo chmod +x ./Cross-Compile_FFMPEG.sh
+          sudo ./Cross-Compile_FFMPEG.sh
       - name: Archive bin
         run: |
           zip -r ./ffmpeg_install/bin.zip ./ffmpeg_install/bin/
