@@ -34,6 +34,6 @@ jobs:
           zip -r ./ffmpeg_install/bin.zip ./ffmpeg_install/bin/
           
       - name: Create Releases
-        uses: ncipollo/release-action@v3
+        uses: ncipollo/release-action@v1
         with:
           artifacts: "./ffmpeg_install/bin.zip"
