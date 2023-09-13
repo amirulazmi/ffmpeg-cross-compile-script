@@ -1,0 +1,39 @@
+name: Compile FFMPEG
+
+on:
+  push:
+    tags:
+      - v**
+run-name:  Compile ffmpeg
+jobs:
+  build:
+    name: Compile
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Shell
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+          
+      - name: Run Prep_System.sh
+        run: |
+          chmod +x ./Prep_System.sh
+          ./Prep_System.sh
+          
+      - name: Run Cross-Compile_FFMPEG.sh
+        run: |
+          chmod +x ./Cross-Compile_FFMPEG.sh
+          ./Cross-Compile_FFMPEG.sh
+      - name: Archive bin
+        run: |
+          zip -r ./ffmpeg_install/bin.zip ./ffmpeg_install/bin/
+          
+      - name: Create Releases
+        uses: ncipollo/release-action@v3
+        with:
+          artifacts: "./ffmpeg_install/bin.zip"
