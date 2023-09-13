@@ -20,6 +20,9 @@ jobs:
         with:
           python-version: 3.x
           
+      - name: Install MinGW
+        run: sudo apt-get install mingw-w64
+          
       - name: Run Prep_System.sh
         run: |
           chmod +x ./Prep_System.sh
